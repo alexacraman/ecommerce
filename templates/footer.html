@@ -1,0 +1,26 @@
+<footer  class="sticky top-[100vh]" >
+<div id="footerSvg" class="bg-gray-700 text-white grid grid-cols-1 lg:grid-cols-2 gap-6 p-12 place-content-center ">
+    
+    <div class="border p-12">
+        <h3 class="text-lg text-center p-2">Get in touch </h3>
+        <div class="flex justify-center">
+            <a href="{% url 'contact_view' %}" class="py-2 px-8 border bg-blue-800 Hover:bg-blue-900">Contact</a>
+        </div>
+       
+    </div>
+    <div class="border p-12 shadow-2xl">
+        <h3 class="text-lg text-center p-2">Privacy Policy</h3>
+        <div class="flex justify-center">
+            <a href="{% url 'policy' %}" class="py-2 px-8 border bg-blue-800 Hover:bg-blue-900">View</a>
+        </div>
+       </div>
+  
+       
+
+      
+</div>
+<div class="bg-gray-800 text-gray-400">Course cover credit Image by <a href="https://pixabay.com/users/mohamed_hassan-5229782/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=7323725">Mohamed Hassan</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=7323725">Pixabay</a></div>
+
+
+    <div class="text-center text-sm bg-gray-900 p-6 text-slate-100">The Care Guild {% now "Y" %}</div>
+</footer>

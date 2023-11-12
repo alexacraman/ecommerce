@@ -1,0 +1,24 @@
+{% extends 'account/base.html' %}
+{% block content %}
+<h2 class="text-center text-gray-600 font-bold">Your Orders</h2>
+<div class="max-w-lg mx-auto flex space-x-6 overflow-scroll bg-blue-200 p-24 shadow-2xl snap-x snap-mandatory rounded">
+    
+    {% for order in orders %}
+        <div class="text-gray-700 border-2 border-gray-300 px-12 py-8 shadow-lg bg-white snap-always snap-center rounded-lg" >
+            <p>Name:    {{ order.first_name }} {{ order.last_name }}</p>
+            <p>Email:   {{ order.email }}</p>
+            <p>Date:    {{ order.created }}</p>
+        {% for item in order.items.all %}
+     
+                <p>{{ item.product.name }}</p>
+                <a href="{{ item.product.get_download_url }}" class=" border-4 border-blue-900 bg-blue-400 text-slate-900">Download Product</a>
+                <p class="">£{{ item.price|floatformat:2 }}</p>
+              
+        {% endfor %}
+</div>
+{% endfor %}
+</div>
+
+
+{{ product_obj }}
+{% endblock %}

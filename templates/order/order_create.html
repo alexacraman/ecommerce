@@ -1,0 +1,27 @@
+{% extends 'account/base.html' %}
+{% block content %}
+<div class="max-w-3xl mx-auto  text-gray-600 p-12 ">
+    <h1 class=" text-4xl  text-center">Order</h1>
+    <div class="grid grid-cols-2 p-6">
+        
+        <div class="mx-6">
+            <form method="POST" class="flex flex-col"  >
+                {{ form }}
+                {% csrf_token %}
+                <input value="Place Order" type="submit" class="my-12 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+            </form>
+        </div>
+        <div class="bg-blue-100 p-6 mx-6 rounded text-lg outline-double">
+
+            <h2 class="text-2xl">Your Order</h2>
+            {% for item in cart %}
+            <p class="my-4">{{ item.quantity }} x {{ item.product.name }}</p>
+            <p>£{{ item.total_price  }}</p>
+            {% endfor %}
+            
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

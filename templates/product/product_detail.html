@@ -1,0 +1,47 @@
+{% extends 'account/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container mx-auto ">
+   
+      <h1 class="text-5xl text-gray-600 font-bold text-center p-12" >{{ product.name }}</h1>
+      <div class=" text-gray-600 grid grid-cols-1 lg:grid-cols-2 text-2xl lg:text-xl  my-6">
+            <div class="p-6 col-span-1 mx-auto order-last  lg:order-first">
+                <img class="outline-double outline-lime-300 shadow-2xl" src="{% static 'img/course.png' %}">
+                <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                  {{ form }}
+                  {% csrf_token %}
+                  <div class="flex justify-center p-6">
+                    <input type="submit" value="Add to cart"  class=" mx-auto flex items-center justify-center px-8 py-12 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+                  </div>
+                 
+                </form>
+              </div>
+            <div class="p-6 ">
+                <h4 class="font-bold " >Description:</h4> 
+                  <p class="my-6">{{ product.description}}</p> 
+                  <!-- <h4 class=" font-bold" >Included:</h4> 
+                  <ul>
+                    <li>✓ What is mental health</li>
+                    <li>✓ Who has mental health</li>
+                    <li>✓ What does poor mental health look like</li>
+                    <li>✓ What does good mental health look like and how to promote this</li>
+                    <li>✓ How to spot the signs in yourself and others who may be experiencing poor mental health</li>
+                    <li>✓ What help is out there and how to access this</li>
+                  </ul> -->
+                  <!-- <h4 class="font-bold my-6" >Price:</h4> 
+                  <del class="text-red-800 ">£99.99</del>
+                  <p class="mt-4">Get 10% off for a limited time only</p> -->
+                  <p class="mt-4 font-bold">£ {{ product.price }}</p>
+                
+            
+            </div>
+      </div>  
+ 
+
+</div>
+
+
+
+
+{% endblock %}

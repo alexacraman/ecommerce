@@ -1,0 +1,78 @@
+
+{% load static %}
+{% url 'products:list' as home_url %}
+{% url 'projects' as projects_url %}
+{% url 'accounts:dashboard' as dashboard_url %}
+ 
+
+<div class="navbar text-white  text-lg md:text-xl ">
+ 
+ 
+    <div class="navbar_link navbar_btn  ">
+    <svg xmlns="http://www.w3.org/2000/svg" id="toggleBtn" class="h-12 w-12 text-gold"  fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+    </div>
+    
+   <nav class="navbar_items rev_navbar_toggleShow">
+     <div class="navbar_link link p-1 rounded" {% if request.path == home_url %}class="text-gray-800 p-1 rounded "{% endif %}>
+        <a href="{{ home_url }}"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+        </svg>
+        </a>
+     </div>
+     <!-- <div class="navbar_link link p-1 rounded" {% if request.path == projects_url  %}class="text-gray-800p-1 rounded "{% endif %}>
+        <a href="{{ projects_url }}">Projects</a>
+     </div>
+     <div class="navbar_link link p-1 rounded" {% if request.path == prices_url   %}class="text-gray-800 p-1 rounded "{% endif %} >
+        <a href="{{ prices_url }}">Prices</a>
+     </div> -->
+    
+   </nav>
+   <!-- <span class="navbar_link navbar_link-brand " > -->
+    <!-- <img src="{% static 'img/' %}" alt="logo" class="nav_img h-20 w-20 mx-auto logoMain"> -->
+    <!-- </span> -->
+   <nav class="navbar_items navbar_items-right rev_navbar_toggleShow p-6">
+     <div class="navbar_link">
+            {% with total_items=cart|length %}
+                    <a href="{% url 'cart:cart_detail' %}" id="cart-info" class="mr-6 ">
+                       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg> £{{ cart.get_total_price }}, {{ total_items }} item{{ total_items|pluralize }}
+                    </a>
+            {% endwith %}
+     </div>
+     {% if user.is_authenticated %}
+            <div class="navbar_link "><a href="{{ dashboard_url }}"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg> Account</a></div>
+            <div class="navbar_link "><a href="{% url 'account_logout' %}"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg> Log Out</a></div>
+            {% else %}
+            <div class="navbar_link "><a href="{% url 'account_login' %}"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+            </svg> LogIn</a></div>
+            <div class="navbar_link "><a href="{% url 'account_signup' %}"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+            </svg> Sign Up</a></div>
+            {% endif %}
+   </nav>
+ </div>
+
+
+
+ <!-- {% with total_items=cart|length %}
+                {% if cart|length > 0 %}
+                
+                    <a href="{% url 'cart:cart_detail' %}" id="cart-info">
+                        {{ total_items }} item{{ total_items|pluralize }}, £{{ cart.get_total_price }}<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                    </a>
+                {% else %}
+                <svg xmlns="http://www.w3.org/2000/svg"  class="h-6 w-6 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>0
+                {% endif %}
+            {% endwith %} -->
